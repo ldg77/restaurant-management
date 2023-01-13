@@ -10,6 +10,8 @@ export default function RegisterForm({
   method,
   id,
   setTrigger,
+  path,
+  role,
 }) {
   const changeForm = (arr) =>
     arr.reduce((acc, el) => {
@@ -17,14 +19,7 @@ export default function RegisterForm({
       return acc;
     }, {});
 
-  const INITIAL = {
-    name: "",
-    username: "",
-    email: "",
-    password: "",
-    repeatPassword: "",
-    role: "",
-  };
+  const INITIAL = {};
   const navigator = useNavigate();
   const [data, setData] = useState(changeForm(Object.keys(fields)));
   const [roleList, setRoleList] = useState([]);
@@ -43,7 +38,7 @@ export default function RegisterForm({
 
   const handlePOST = () => {
     if (data.password === data.repeatPassword) {
-      fetch("http://localhost:4000/users", {
+      fetch(`http://localhost:4000/${path}`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -62,7 +57,7 @@ export default function RegisterForm({
     }
   };
   const handlePATCH = (id) => {
-    fetch("http://localhost:4000/users/" + id, {
+    fetch(`http://localhost:4000/${path}/${id}`, {
       method: "PATCH",
       body: JSON.stringify(data),
       headers: {
@@ -101,19 +96,21 @@ export default function RegisterForm({
           type={fields[el]}
           name={el}
           placeholder={el}
-          className="border-b-2 outline-none active::bg-inherit"
+          className="border-b-2 outline-none active::bg-inherit text-black"
           onChange={handleChange}
           value={data[el]}
           required
         />
       ))}
-      <select name="role" placeholder="role" onChange={handleChange}>
-        {roleList.map((el) => (
-          <option value={el._id} key={el._id}>
-            {el.name}
-          </option>
-        ))}
-      </select>
+      {role && (
+        <select name="role" placeholder="role" onChange={handleChange}>
+          {roleList.map((el) => (
+            <option value={el._id} key={el._id}>
+              {el.name}
+            </option>
+          ))}
+        </select>
+      )}
       <button className="bg-slate-700 text-white w-max px-3 py-2 rounded-xl mx-auto hover:bg-slate-900">
         {submit}
       </button>

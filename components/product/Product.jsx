@@ -3,32 +3,33 @@ import { NavLink } from "react-router-dom";
 import SearchForm from "../SearchForm.jsx";
 import ButtonForm from "./ButtonForm.jsx";
 
-export default function User() {
-  const [users, setUsers] = useState([]);
+export default function Product() {
+  const [products, setProducts] = useState([]);
   const [trigger, setTrigger] = useState(false);
-
   const fields = {
     add: {
       name: "text",
-      username: "text",
-      email: "email",
-      password: "password",
-      repeatPassword: "password",
+      avatar: "file",
+      price: "number",
+      description: "textarea",
+      category: "text",
     },
     edit: {
       name: "text",
-      username: "text",
-      email: "email",
+      avatar: "file",
+      price: "number",
+      description: "textarea",
+      category: "text",
     },
   };
   useEffect(() => {
-    fetch("http://localhost:4000/users")
+    fetch("http://localhost:4000/products")
       .then((res) => res.json())
-      .then((json) => setUsers((prev) => (prev = json)));
+      .then((json) => setProducts((prev) => (prev = json)));
   }, [trigger]);
 
   const handleDelete = (id) => {
-    fetch("http://localhost:4000/users/" + id, {
+    fetch("http://localhost:4000/products/" + id, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -40,42 +41,53 @@ export default function User() {
   return (
     <div className="w-full sm:p-5 flex flex-col gap-5">
       <div className="top flex justify-between">
-        <p className="font-sans text-2xl">Manage users</p>
-        <NavLink to="dashboard">Dashboard</NavLink>
+        <p className="font-sans text-2xl">Manage products</p>
+        <NavLink to="/dashboard">Dashboard</NavLink>
       </div>
-      <div className="add flex justify-between items-center ">
+      <div className="add flex justify-between items-center">
         <ButtonForm
           setTrigger={setTrigger}
           fields={fields.add}
-          submit="Add User"
+          submit="Add product"
           bg="bg-blue-800"
           method="POST"
-          path="users"
-          role={true}
+          path="products"
         />
-        <SearchForm what={"users"} setData={setUsers} on={"name"} />
+        <SearchForm what={"products"} setData={setProducts} on={"name"} />
       </div>
       <table className="text-center">
-        {users && (
+        {products && (
           <>
-            <thead>
-              <tr className="bg-slate-700 text-white uppercase">
+            <thead className="w-screen">
+              <tr className="bg-slate-700 text-white uppercase justify-between w-full">
+                <th>avatar</th>
                 <th>name</th>
-                <th>username</th>
-                <th className="">email</th>
-                <th>role</th>
-                <th>action</th>
+                <th>price</th>
+                <th>description</th>
+                <th>category</th>
+                <th>available</th>
+                <th className="text-right">action</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((el) => (
+              {products.map((el) => (
                 <tr className="odd:bg-slate-500 odd:text-white" key={el._id}>
-                  {<td>{el.name}</td>}
-                  {<td>{el.username}</td>}
-                  {<td>{el.email}</td>}
-                  {<td>{el.role.name}</td>}
                   {
-                    <td className="flex justify-end">
+                    <td>
+                      <img src={el.avatar} alt="avatar" />
+                    </td>
+                  }
+                  {<td>{el.name}</td>}
+                  {<td>{el.price}</td>}
+                  {<td>{el.description}</td>}
+                  {<td>{el.category}</td>}
+                  {
+                    <td>
+                      <input type="checkbox" checked={el.name} />{" "}
+                    </td>
+                  }
+                  {
+                    <td className="flex justify-end ">
                       <ButtonForm
                         fields={fields.edit}
                         setTrigger={setTrigger}
@@ -84,13 +96,14 @@ export default function User() {
                         bg="bg-yellow-400"
                         left="-left-60"
                         id={el._id}
-                        path="users"
-                        role={true}
+                        path="products"
                       />
                       <button
                         className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition"
                         onClick={() => {
-                          handleDelete(el._id);
+                          if (groups.length > 1) {
+                            handleDelete(el._id);
+                          }
                         }}
                       >
                         Delete

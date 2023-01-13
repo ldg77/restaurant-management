@@ -3,32 +3,25 @@ import { NavLink } from "react-router-dom";
 import SearchForm from "../SearchForm.jsx";
 import ButtonForm from "./ButtonForm.jsx";
 
-export default function User() {
-  const [users, setUsers] = useState([]);
+export default function Group() {
+  const [groups, setGroups] = useState([]);
   const [trigger, setTrigger] = useState(false);
-
   const fields = {
     add: {
       name: "text",
-      username: "text",
-      email: "email",
-      password: "password",
-      repeatPassword: "password",
     },
     edit: {
       name: "text",
-      username: "text",
-      email: "email",
     },
   };
   useEffect(() => {
-    fetch("http://localhost:4000/users")
+    fetch("http://localhost:4000/groups")
       .then((res) => res.json())
-      .then((json) => setUsers((prev) => (prev = json)));
+      .then((json) => setGroups((prev) => (prev = json)));
   }, [trigger]);
 
   const handleDelete = (id) => {
-    fetch("http://localhost:4000/users/" + id, {
+    fetch("http://localhost:4000/groups/" + id, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -40,42 +33,36 @@ export default function User() {
   return (
     <div className="w-full sm:p-5 flex flex-col gap-5">
       <div className="top flex justify-between">
-        <p className="font-sans text-2xl">Manage users</p>
-        <NavLink to="dashboard">Dashboard</NavLink>
+        <p className="font-sans text-2xl">Manage groups</p>
+        <NavLink to="/dashboard">Dashboard</NavLink>
       </div>
-      <div className="add flex justify-between items-center ">
+      <div className="add flex justify-between items-center">
         <ButtonForm
           setTrigger={setTrigger}
           fields={fields.add}
-          submit="Add User"
+          submit="Add Group"
           bg="bg-blue-800"
           method="POST"
-          path="users"
-          role={true}
+          path="groups"
         />
-        <SearchForm what={"users"} setData={setUsers} on={"name"} />
+        <SearchForm what={"groups"} setData={setGroups} on={"name"} />
       </div>
       <table className="text-center">
-        {users && (
+        {groups && (
           <>
-            <thead>
-              <tr className="bg-slate-700 text-white uppercase">
+            <thead className="w-screen">
+              <tr className="bg-slate-700 text-white uppercase justify-between w-full">
                 <th>name</th>
-                <th>username</th>
-                <th className="">email</th>
-                <th>role</th>
-                <th>action</th>
+                <th className="text-right">action</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((el) => (
+              {groups.map((el) => (
                 <tr className="odd:bg-slate-500 odd:text-white" key={el._id}>
                   {<td>{el.name}</td>}
-                  {<td>{el.username}</td>}
-                  {<td>{el.email}</td>}
-                  {<td>{el.role.name}</td>}
+
                   {
-                    <td className="flex justify-end">
+                    <td className="flex justify-end ">
                       <ButtonForm
                         fields={fields.edit}
                         setTrigger={setTrigger}
@@ -84,13 +71,14 @@ export default function User() {
                         bg="bg-yellow-400"
                         left="-left-60"
                         id={el._id}
-                        path="users"
-                        role={true}
+                        path="groups"
                       />
                       <button
                         className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition"
                         onClick={() => {
-                          handleDelete(el._id);
+                          if (groups.length > 1) {
+                            handleDelete(el._id);
+                          }
                         }}
                       >
                         Delete

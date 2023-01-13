@@ -4,6 +4,9 @@ import MainPart from "../components/MainPart.jsx";
 import User from "../components/user/User.jsx";
 import Login from "../components/Login.jsx";
 import Register from "../components/Register.jsx";
+import Dashboard from "../components/dashboard/Dashboard.jsx";
+import Group from "../components/group/Group.jsx";
+import Product from "../components/product/Product.jsx";
 
 function App() {
   return (
@@ -12,7 +15,10 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/auth" element={<MainPart />}>
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="user" element={<User />} />
+          <Route path="group" element={<Group />} />
+          <Route path="product" element={<Product />} />
         </Route>
       </Routes>
     </div>

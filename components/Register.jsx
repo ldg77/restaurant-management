@@ -15,6 +15,8 @@ export default function Register() {
         submit={"register"}
         fields={fields}
         method="POST"
+        path="users"
+        role={true}
       />
       <p className="font-thin text-center font-sans mt-3">
         have allready an account?{" "}
