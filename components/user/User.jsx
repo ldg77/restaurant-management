@@ -2,10 +2,19 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import RegisterForm from "../RegisterForm.jsx";
 import SearchForm from "../SearchForm.jsx";
+import UserButons from "./UserButons.jsx";
 
 export default function User() {
   const [users, setUsers] = useState();
   const [show, setShow] = useState({ showAdd: false, modified: false });
+
+  const fields = {
+    name: "text",
+    username: "text",
+    email: "email",
+    password: "password",
+    repeatPassword: "password",
+  };
   useEffect(() => {
     fetch("http://localhost:4000/users")
       .then((res) => res.json())
@@ -25,7 +34,6 @@ export default function User() {
         setShow((prev) => (prev = { ...prev, modified: !prev.modified }))
       );
   };
-
   return (
     <div className="w-full sm:p-5 flex flex-col gap-5">
       <div className="top flex justify-between">
@@ -46,7 +54,9 @@ export default function User() {
             <RegisterForm
               position={"absolute"}
               setShow={setShow}
-              submit={"add"}
+              submit={"Add User"}
+              fields={fields}
+              method="POST"
             />
           )}
         </div>
@@ -73,11 +83,7 @@ export default function User() {
                   {<td>{el.role.name}</td>}
                   {
                     <td className="flex justify-end">
-                      <div className="edit">
-                        <button className="bg-yellow-300 sm:p-3 text-white hover:bg-yellow-400 transition">
-                          Edit
-                        </button>
-                      </div>
+                      <UserButons id={el._id} />
                       <button
                         className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition"
                         onClick={() => {
