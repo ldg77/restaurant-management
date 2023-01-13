@@ -61,18 +61,18 @@ export default function Login() {
         <button className="bg-slate-700 text-white w-max px-3 py-2 rounded-xl mx-auto hover:bg-slate-900">
           login
         </button>
-        <div className="font-thin text-center font-sans relative">
-          need an account?{" "}
-          <Link to="/register" className="font-bold">
-            register
-          </Link>
-          {show && (
-            <p className="absolute bg-slate-700 text-red-300 inset-0 rounded">
-              wrong login data
-            </p>
-          )}
-        </div>
       </form>
+      <div className="font-thin text-center font-sans relative mt-3">
+        need an account?{" "}
+        <Link to="/register" className="font-bold">
+          register
+        </Link>
+        {show && (
+          <p className="absolute bg-slate-700 text-red-300 inset-0 rounded">
+            wrong login data
+          </p>
+        )}
+      </div>
     </div>
   );
 }

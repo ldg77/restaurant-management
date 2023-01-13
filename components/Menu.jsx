@@ -10,7 +10,7 @@ export default function Menu() {
       .then((json) => setStatus(json));
   }, []);
   return (
-    <div className="sm:w-1/3 h-full">
+    <div className="sm:min-h-max h-full">
       {(status.aprooved && status.isAdmin && (
         <ul className="flex flex-col gap-5 text-2xl group p-5 bg-slate-900 text-white h-full">
           <li className="bg-slate-600 p-3 rounded hover:bg-slate-800 hover:cursor-pointer">
