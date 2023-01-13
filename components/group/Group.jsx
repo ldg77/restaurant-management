@@ -62,19 +62,19 @@ export default function Group() {
                   {<td>{el.name}</td>}
 
                   {
-                    <td className="flex justify-end ">
+                    <td className="flex justify-end py-5 mr-3">
                       <ButtonForm
                         fields={fields.edit}
                         setTrigger={setTrigger}
                         submit="Edit"
                         method="PATCH"
                         bg="bg-yellow-400"
-                        left="-left-60"
+                        left={"right-0"}
                         id={el._id}
                         path="groups"
                       />
                       <button
-                        className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition"
+                        className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition rounded-r-lg"
                         onClick={() => {
                           if (groups.length > 1) {
                             handleDelete(el._id);

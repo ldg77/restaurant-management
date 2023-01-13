@@ -62,32 +62,36 @@ export default function User() {
               <tr className="bg-slate-700 text-white uppercase">
                 <th>name</th>
                 <th>username</th>
-                <th className="">email</th>
+                <th>email</th>
                 <th>role</th>
                 <th>action</th>
               </tr>
             </thead>
             <tbody>
               {users.map((el) => (
-                <tr className="odd:bg-slate-500 odd:text-white" key={el._id}>
+                <tr
+                  className="odd:bg-slate-500 odd:text-white p-3"
+                  key={el._id}
+                >
                   {<td>{el.name}</td>}
                   {<td>{el.username}</td>}
                   {<td>{el.email}</td>}
                   {<td>{el.role.name}</td>}
                   {
-                    <td className="flex justify-end">
+                    <td className="flex justify-end py-5 mr-3">
                       <ButtonForm
                         fields={fields.edit}
                         setTrigger={setTrigger}
                         submit="Edit"
                         method="PATCH"
                         bg="bg-yellow-400"
-                        left="-left-60"
+                        left={"right-0"}
                         id={el._id}
                         path="users"
+                        role={true}
                       />
                       <button
-                        className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition"
+                        className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition rounded-r-lg"
                         onClick={() => {
                           handleDelete(el._id);
                         }}

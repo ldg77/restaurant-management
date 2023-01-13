@@ -1,14 +1,17 @@
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-export default function Menu() {
-  const [status, setStatus] = useState({});
-  useEffect(() => {
-    fetch("http://localhost:4000/users/checklogin", {
+export default function Menu({ status }) {
+  const handleĹogout = () => {
+    fetch("http://localhost:4000/users/logout", {
+      method: "POST",
       credentials: "include",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
     })
       .then((res) => res.json())
-      .then((json) => setStatus(json));
-  }, []);
+      .then((json) => console.log(json));
+  };
   return (
     <div className="sm:min-h-max h-full">
       {(status.aprooved && status.isAdmin && (
@@ -43,13 +46,9 @@ export default function Menu() {
               TABLE
             </NavLink>
           </li>
+
           <li className="bg-slate-600 p-3 rounded hover:bg-slate-800 hover:cursor-pointer hover:translate-x-1 transition">
-            <NavLink to="password" className="block">
-              PASSWORD
-            </NavLink>
-          </li>
-          <li className="bg-slate-600 p-3 rounded hover:bg-slate-800 hover:cursor-pointer hover:translate-x-1 transition">
-            <NavLink to="/" className="block">
+            <NavLink to="/" className="block" onClick={handleĹogout}>
               EXIT
             </NavLink>
           </li>
@@ -58,12 +57,13 @@ export default function Menu() {
         (status.aprooved && (
           <ul className="flex flex-col gap-5 text-2xl group p-5 bg-slate-900 text-white h-full">
             <li className="bg-slate-600 p-3 rounded hover:bg-slate-800 hover:cursor-pointer">
-              <NavLink to="password" className="block">
-                PASSWORD
+              {" "}
+              <NavLink to="table" className="block">
+                TABLE
               </NavLink>
             </li>
             <li className="bg-slate-600 p-3 rounded hover:bg-slate-800 hover:cursor-pointer hover:translate-x-1 transition">
-              <NavLink to="/" className="block">
+              <NavLink to="/" className="block" onClick={handleĹogout}>
                 EXIT
               </NavLink>
             </li>

@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import RegisterForm from "./RegisterForm.jsx";
 export default function Login() {
   const INITIAL = {
     username: "",
@@ -13,12 +12,12 @@ export default function Login() {
   const navigator = useNavigate();
   const [data, setData] = useState(INITIAL);
   const [show, setShow] = useState(false);
+
   const handleChange = (e) => {
     setData((prev) => (prev = { ...prev, [e.target.name]: e.target.value }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
     fetch("http://localhost:4000/users/login", {
       method: "POST",
       body: JSON.stringify(data),
@@ -47,22 +46,26 @@ export default function Login() {
         className="border p-5 flex flex-col gap-3 shadow-2xl rounded-lg"
         onSubmit={handleSubmit}
       >
-        <input
-          type="text"
-          name="username"
-          placeholder="username"
-          className="border-b-2 outline-none active::bg-inherit"
-          onChange={handleChange}
-          value={data.username}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          className="border-b-2 outline-none bg-inherit"
-          onChange={handleChange}
-          value={data.password}
-        />
+        <div className="flex justify-between items-center gap-3">
+          <label>username</label>
+          <input
+            type="text"
+            name="username"
+            className="border-b-2 outline-none active::bg-inherit"
+            onChange={handleChange}
+            value={data.username}
+          />
+        </div>
+        <div className="flex justify-between items-center gap-3">
+          <label>password</label>
+          <input
+            type="password"
+            name="password"
+            className="border-b-2 outline-none bg-inherit"
+            onChange={handleChange}
+            value={data.password}
+          />
+        </div>
         <button className="bg-slate-700 text-white w-max px-3 py-2 rounded-xl mx-auto hover:bg-slate-900">
           login
         </button>

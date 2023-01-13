@@ -48,11 +48,10 @@ export default function Product() {
       <div className="add flex justify-between items-center">
         <ButtonForm
           setTrigger={setTrigger}
-          fields={fields.add}
-          submit="Add product"
-          bg="bg-blue-800"
-          method="POST"
-          path="products"
+          submit="Add Product"
+          bg={"bg-blue-800"}
+          hoverBg={"bg-blue-900"}
+          rounded={"rounded"}
         />
         <SearchForm what={"products"} setData={setProducts} on={"name"} />
       </div>
@@ -60,14 +59,14 @@ export default function Product() {
         {products && (
           <>
             <thead className="w-screen">
-              <tr className="bg-slate-700 text-white uppercase justify-between w-full">
+              <tr className="bg-slate-700 text-white uppercase justify-between w-full ">
                 <th>avatar</th>
                 <th>name</th>
                 <th>price</th>
                 <th>description</th>
                 <th>category</th>
                 <th>available</th>
-                <th className="text-right">action</th>
+                <th className="text-right px-3">action</th>
               </tr>
             </thead>
             <tbody>
@@ -75,7 +74,11 @@ export default function Product() {
                 <tr className="odd:bg-slate-500 odd:text-white" key={el._id}>
                   {
                     <td>
-                      <img src={el.avatar} alt="avatar" />
+                      <img
+                        src={el.avatar}
+                        alt="avatar"
+                        className="w-20 h-20 rounded-full p-2"
+                      />
                     </td>
                   }
                   {<td>{el.name}</td>}
@@ -84,27 +87,24 @@ export default function Product() {
                   {<td>{el.category}</td>}
                   {
                     <td>
-                      <input type="checkbox" checked={el.name} />{" "}
+                      <input type="checkbox" checked={el.available} />{" "}
                     </td>
                   }
                   {
-                    <td className="flex justify-end ">
+                    <td className="flex justify-end py-5 mr-3">
                       <ButtonForm
-                        fields={fields.edit}
                         setTrigger={setTrigger}
-                        submit="Edit"
-                        method="PATCH"
-                        bg="bg-yellow-400"
-                        left="-left-60"
                         id={el._id}
-                        path="products"
+                        submit="Edit"
+                        bg={"bg-yellow-400"}
+                        left={"right-0"}
+                        hoverBg={"bg-yellow-900"}
+                        rounded={"rounded-l-lg"}
                       />
                       <button
-                        className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition"
+                        className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition rounded-r-lg"
                         onClick={() => {
-                          if (groups.length > 1) {
-                            handleDelete(el._id);
-                          }
+                          handleDelete(el._id);
                         }}
                       >
                         Delete

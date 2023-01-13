@@ -96,7 +96,7 @@ export default function RegisterForm({
     >
       {Object.keys(fields).map((el) => (
         <div className="flex justify-between items-center gap-3">
-          <label>{el}</label>
+          <label className="text-black">{el}</label>
           <input
             key={el._id}
             type={fields[el]}
@@ -108,9 +108,14 @@ export default function RegisterForm({
         </div>
       ))}
       {role && (
-        <select name="role" placeholder="role" onChange={handleChange}>
+        <select
+          name="role"
+          placeholder="role"
+          onChange={handleChange}
+          className="text-black p-2"
+        >
           {roleList.map((el) => (
-            <option value={el._id} key={el._id}>
+            <option value={el._id} key={el._id} className="p-3">
               {el.name}
             </option>
           ))}

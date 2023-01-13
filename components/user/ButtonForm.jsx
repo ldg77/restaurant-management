@@ -16,7 +16,7 @@ export default function ButtonForm({
   return (
     <div className="relative">
       <button
-        className={`${bg} text-white p-3 rounded`}
+        className={`${bg} text-white p-3 ${left ? "rounded-l-lg" : "rounded"}`}
         onClick={() => {
           setShow((prev) => (prev = !prev));
         }}
