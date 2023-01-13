@@ -20,6 +20,7 @@ export default function Product() {
       price: "number",
       description: "textarea",
       category: "text",
+      available: "checkbox",
     },
   };
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function Product() {
     <div className="w-full sm:p-5 flex flex-col gap-5">
       <div className="top flex justify-between">
         <p className="font-sans text-2xl">Manage products</p>
-        <NavLink to="/dashboard">Dashboard</NavLink>
+        <NavLink to="/auth/dashboard">Dashboard</NavLink>
       </div>
       <div className="add flex justify-between items-center">
         <ButtonForm

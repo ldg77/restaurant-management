@@ -85,7 +85,6 @@ export default function User() {
                         left="-left-60"
                         id={el._id}
                         path="users"
-                        role={true}
                       />
                       <button
                         className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition"

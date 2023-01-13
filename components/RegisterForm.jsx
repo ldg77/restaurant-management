@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 export default function RegisterForm({
   position,
   setShow,
@@ -18,18 +17,19 @@ export default function RegisterForm({
       acc[el] = "";
       return acc;
     }, {});
-
-  const INITIAL = {};
+  const INITIAL = changeForm(Object.keys(fields));
   const navigator = useNavigate();
-  const [data, setData] = useState(changeForm(Object.keys(fields)));
+  const [data, setData] = useState(INITIAL);
   const [roleList, setRoleList] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:4000/groups")
-      .then((response) => response.json())
-      .then((json) => {
-        setRoleList((prev) => (prev = json));
-        setData((prev) => (prev = { ...prev, role: json[0]._id }));
-      });
+    if (role) {
+      fetch("http://localhost:4000/groups")
+        .then((response) => response.json())
+        .then((json) => {
+          setRoleList((prev) => (prev = json));
+          setData((prev) => (prev = { ...prev, role: json[0]._id }));
+        });
+    }
   }, []);
 
   const handleChange = (e) => {
@@ -37,24 +37,28 @@ export default function RegisterForm({
   };
 
   const handlePOST = () => {
-    if (data.password === data.repeatPassword) {
-      fetch(`http://localhost:4000/${path}`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      })
-        .then((response) => response.json())
-        .then((json) => {
+    if (submit === "register" && !data.password === data.repeatPassword) return;
+
+    fetch(`http://localhost:4000/${path}`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.message) {
           if (submit === "register") {
             navigator("/");
+          } else if (submit === "login") {
+            navigator("/auth");
           }
           setData(INITIAL);
           setShow(false);
           setTrigger((prev) => (prev = !prev));
-        });
-    }
+        }
+      });
   };
   const handlePATCH = (id) => {
     fetch(`http://localhost:4000/${path}/${id}`, {
@@ -91,16 +95,17 @@ export default function RegisterForm({
       onSubmit={handleSubmit}
     >
       {Object.keys(fields).map((el) => (
-        <input
-          key={el._id}
-          type={fields[el]}
-          name={el}
-          placeholder={el}
-          className="border-b-2 outline-none active::bg-inherit text-black"
-          onChange={handleChange}
-          value={data[el]}
-          required
-        />
+        <div className="flex justify-between items-center gap-3">
+          <label>{el}</label>
+          <input
+            key={el._id}
+            type={fields[el]}
+            name={el}
+            className="border-b-2 outline-none active::bg-inherit text-black"
+            onChange={handleChange}
+            value={data[el]}
+          />
+        </div>
       ))}
       {role && (
         <select name="role" placeholder="role" onChange={handleChange}>

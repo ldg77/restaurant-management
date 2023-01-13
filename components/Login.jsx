@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import RegisterForm from "./RegisterForm.jsx";
 export default function Login() {
   const INITIAL = {
     username: "",
     password: "",
+  };
+  const fields = {
+    username: "text",
+    password: "password",
   };
   const navigator = useNavigate();
   const [data, setData] = useState(INITIAL);
