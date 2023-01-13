@@ -1,27 +1,32 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import RegisterForm from "../RegisterForm.jsx";
 import SearchForm from "../SearchForm.jsx";
-import UserButons from "./UserButons.jsx";
+import ButtonForm from "./ButtonForm.jsx";
 
 export default function User() {
-  const [users, setUsers] = useState();
-  const [show, setShow] = useState({ showAdd: false, modified: false });
+  const [users, setUsers] = useState([]);
+  const [trigger, setTrigger] = useState(false);
 
   const fields = {
-    name: "text",
-    username: "text",
-    email: "email",
-    password: "password",
-    repeatPassword: "password",
+    add: {
+      name: "text",
+      username: "text",
+      email: "email",
+      password: "password",
+      repeatPassword: "password",
+    },
+    edit: {
+      name: "text",
+      username: "text",
+      email: "email",
+    },
   };
   useEffect(() => {
     fetch("http://localhost:4000/users")
       .then((res) => res.json())
       .then((json) => setUsers((prev) => (prev = json)));
-  }, [show]);
+  }, [trigger]);
 
-  const handleEdit = () => {};
   const handleDelete = (id) => {
     fetch("http://localhost:4000/users/" + id, {
       method: "DELETE",
@@ -30,9 +35,7 @@ export default function User() {
       },
     })
       .then((res) => res.json())
-      .then((json) =>
-        setShow((prev) => (prev = { ...prev, modified: !prev.modified }))
-      );
+      .then((json) => setTrigger((prev) => (prev = !prev)));
   };
   return (
     <div className="w-full sm:p-5 flex flex-col gap-5">
@@ -41,25 +44,13 @@ export default function User() {
         <NavLink to="dashboard">Dashboard</NavLink>
       </div>
       <div className="add flex justify-between items-center">
-        <div className="relative">
-          <button
-            className="bg-blue-800 text-white p-3 rounded"
-            onClick={() => {
-              setShow((prev) => (prev = { ...prev, showAdd: !prev.showAdd }));
-            }}
-          >
-            Add User
-          </button>
-          {show.showAdd && (
-            <RegisterForm
-              position={"absolute"}
-              setShow={setShow}
-              submit={"Add User"}
-              fields={fields}
-              method="POST"
-            />
-          )}
-        </div>
+        <ButtonForm
+          setTrigger={setTrigger}
+          fields={fields.add}
+          submit="Add User"
+          bg="bg-blue-800"
+          method="POST"
+        />
         <SearchForm what={"Users"} />
       </div>
       <table className="text-center">
@@ -83,7 +74,15 @@ export default function User() {
                   {<td>{el.role.name}</td>}
                   {
                     <td className="flex justify-end">
-                      <UserButons id={el._id} />
+                      <ButtonForm
+                        fields={fields.edit}
+                        setTrigger={setTrigger}
+                        submit="Edit"
+                        method="PATCH"
+                        bg="bg-yellow-400"
+                        left="-left-60"
+                        id={el._id}
+                      />
                       <button
                         className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition"
                         onClick={() => {

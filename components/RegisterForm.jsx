@@ -8,6 +8,8 @@ export default function RegisterForm({
   fields,
   left,
   method,
+  id,
+  setTrigger,
 }) {
   const changeForm = (arr) =>
     arr.reduce((acc, el) => {
@@ -54,12 +56,13 @@ export default function RegisterForm({
             navigator("/");
           }
           setData(INITIAL);
-          setShow((prev) => (prev = { ...prev, showAdd: !prev.showAdd }));
+          setShow(false);
+          setTrigger((prev) => (prev = !prev));
         });
     }
   };
-  const handlePATCH = () => {
-    fetch("http://localhost:4000/users", {
+  const handlePATCH = (id) => {
+    fetch("http://localhost:4000/users/" + id, {
       method: "PATCH",
       body: JSON.stringify(data),
       headers: {
@@ -68,11 +71,11 @@ export default function RegisterForm({
     })
       .then((response) => response.json())
       .then((json) => {
-        if (submit === "register") {
-          navigator("/");
+        if (json.modifiedCount) {
+          setData(INITIAL);
+          setShow(false);
+          setTrigger((prev) => (prev = !prev));
         }
-        setData(INITIAL);
-        setShow((prev) => (prev = { ...prev, showAdd: !prev.showAdd }));
       });
   };
 
@@ -81,7 +84,8 @@ export default function RegisterForm({
     switch (method) {
       case "POST":
         return handlePOST();
-
+      case "PATCH":
+        return handlePATCH(id);
       default:
         break;
     }
@@ -93,12 +97,14 @@ export default function RegisterForm({
     >
       {Object.keys(fields).map((el) => (
         <input
+          key={el._id}
           type={fields[el]}
           name={el}
           placeholder={el}
           className="border-b-2 outline-none active::bg-inherit"
           onChange={handleChange}
           value={data[el]}
+          required
         />
       ))}
       <select name="role" placeholder="role" onChange={handleChange}>
