@@ -73,9 +73,11 @@ export default function User() {
                   {<td>{el.role.name}</td>}
                   {
                     <td className="flex justify-end">
-                      <button className="bg-yellow-300 sm:p-3 text-white hover:bg-yellow-400 transition">
-                        Edit
-                      </button>
+                      <div className="edit">
+                        <button className="bg-yellow-300 sm:p-3 text-white hover:bg-yellow-400 transition">
+                          Edit
+                        </button>
+                      </div>
                       <button
                         className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition"
                         onClick={() => {
