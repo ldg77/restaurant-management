@@ -36,6 +36,7 @@ export default function Register() {
       })
         .then((response) => response.json())
         .then((json) => {
+          console.log(json);
           setData(INITIAL);
           navigator("/");
         });

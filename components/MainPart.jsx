@@ -4,7 +4,7 @@ import Menu from "./Menu.jsx";
 
 export default function MainPart() {
   return (
-    <div className="flex h-full">
+    <div className="flex flex-col sm:flex-row h-full">
       <Menu />
       <Outlet />
     </div>
