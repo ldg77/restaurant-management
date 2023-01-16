@@ -14,7 +14,7 @@ export default function ButtonForm({
     avatar: {},
     price: "",
     description: "",
-    category: "",
+    category: "main",
     available: false,
   };
   const [show, setShow] = useState(false);

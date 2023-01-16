@@ -30,7 +30,6 @@ export default function Login() {
       .then((json) => {
         setData(INITIAL);
         if (json.message) {
-          console.log(json);
           navigator("/auth");
         } else {
           setShow(true);

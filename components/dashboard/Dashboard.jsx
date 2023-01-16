@@ -91,7 +91,7 @@ export default function Dashboard() {
                 {data.products &&
                   data.products
                     .sort((a, b) => b.price - a.price)
-                    .slice(0, 2)
+                    .slice(0, 3)
                     .map((el, i) => (
                       <li>
                         {i + 1}: {el.name} {" : "} {el.price}€

@@ -10,12 +10,31 @@ export default function MainPart() {
       credentials: "include",
     })
       .then((res) => res.json())
-      .then((json) => setStatus(json));
+      .then((json) => setStatus((prev) => (prev = json)));
   }, []);
   return status.aprooved ? (
     <div className="flex flex-col sm:flex-row h-full">
       <Menu status={status} />
-      <Outlet />
+      <div className="auth w-full">
+        <div className="flex w-full justify-between">
+          <p className="p-5 text-2xl ">
+            {" "}
+            You are authorized, {status.user.name}
+          </p>
+          <p className="p-5 text-2xl">
+            <strong className="font-bold">Admin:</strong>{" "}
+            {status.isAdmin ? "true" : "false"}
+          </p>
+        </div>
+
+        {!status.user.isAdmin && (
+          <p className="font-thin">
+            {" "}
+            To use all functionality , you must be Admin
+          </p>
+        )}
+        <Outlet context={status.user} />
+      </div>
     </div>
   ) : (
     <NotAprooved />
