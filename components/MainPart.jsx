@@ -1,21 +1,30 @@
 import { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+
+import { Outlet, useNavigate } from "react-router-dom";
 import Menu from "./Menu.jsx";
 import NotAprooved from "./NotAprooved.jsx";
 
 export default function MainPart() {
+  const navigator = useNavigate();
   const [status, setStatus] = useState({});
   useEffect(() => {
     fetch("http://localhost:4000/users/checklogin", {
       credentials: "include",
     })
       .then((res) => res.json())
-      .then((json) => setStatus((prev) => (prev = json)));
+      .then((json) => {
+        if (json.user.isAdmin) {
+          navigator("/auth/dashboard");
+        } else {
+          navigator("/auth/table");
+        }
+        setStatus((prev) => (prev = json));
+      });
   }, []);
   return status.aprooved ? (
-    <div className="flex flex-col sm:flex-row h-full">
+    <div className="flex flex-col md:flex-row h-full">
       <Menu status={status} />
-      <div className="auth w-full">
+      <div className="auth w-full md:max-w-6xl h-full mx-auto">
         <div className="flex w-full justify-between">
           <p className="p-5 text-2xl ">
             {" "}
@@ -28,7 +37,7 @@ export default function MainPart() {
         </div>
 
         {!status.user.isAdmin && (
-          <p className="font-thin text-center">
+          <p className="font-thin text-center grid place-content-center">
             {" "}
             To use all functionality , you must be Admin
           </p>

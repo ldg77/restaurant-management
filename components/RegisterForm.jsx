@@ -11,17 +11,13 @@ export default function RegisterForm({
   setTrigger,
   path,
   role,
+  user,
 }) {
-  // const changeForm = (arr) =>
-  //   arr.reduce((acc, el) => {
-  //     acc[el] = "";
-  //     return acc;
-  //   }, {});
-  // const INITIAL = changeForm(Object.keys(fields));
   const INITIAL = {};
   const navigator = useNavigate();
   const [data, setData] = useState(INITIAL);
   const [roleList, setRoleList] = useState([]);
+  const [userList, setUserList] = useState([]);
   useEffect(() => {
     if (role) {
       fetch("http://localhost:4000/groups")
@@ -29,6 +25,14 @@ export default function RegisterForm({
         .then((json) => {
           setRoleList((prev) => (prev = json));
           setData((prev) => (prev = { ...prev, role: json[0]._id }));
+        });
+    }
+    if (user) {
+      fetch("http://localhost:4000/users")
+        .then((response) => response.json())
+        .then((json) => {
+          setUserList((prev) => (prev = json));
+          setData((prev) => (prev = { ...prev, user: json[0]._id }));
         });
     }
   }, []);
@@ -115,6 +119,20 @@ export default function RegisterForm({
           className="text-black p-2"
         >
           {roleList.map((el) => (
+            <option value={el._id} key={el._id} className="p-3">
+              {el.name}
+            </option>
+          ))}
+        </select>
+      )}
+      {user && (
+        <select
+          name="user"
+          placeholder="user"
+          onChange={handleChange}
+          className="text-black p-2"
+        >
+          {userList.map((el) => (
             <option value={el._id} key={el._id} className="p-3">
               {el.name}
             </option>

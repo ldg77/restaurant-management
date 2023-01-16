@@ -47,22 +47,25 @@ export default function Group() {
         />
         <SearchForm what={"groups"} setData={setGroups} on={"name"} />
       </div>
-      <table className="text-center">
+      <table className="text-center flex flex-col">
         {groups && (
           <>
-            <thead className="w-screen">
-              <tr className="bg-slate-700 text-white uppercase justify-between w-full">
-                <th>name</th>
-                <th className="text-right">action</th>
+            <thead className="flex w-full">
+              <tr className="bg-slate-700 text-white uppercase w-full flex justify-between rounded px-5">
+                <th className="w-1/2">name</th>
+                <th className="w-1/2">action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="flex flex-col w-full">
               {groups.map((el) => (
-                <tr className="odd:bg-slate-500 odd:text-white" key={el._id}>
-                  {<td>{el.name}</td>}
+                <tr
+                  className="bg-slate-500 text-white px-3 flex justify-between items-center my-2 rounded-t"
+                  key={el._id}
+                >
+                  {<td className="w-1/2">{el.name}</td>}
 
                   {
-                    <td className="flex justify-end py-5 mr-3">
+                    <td className="flex justify-center py-5 mr-3 w-1/2">
                       <ButtonForm
                         fields={fields.edit}
                         setTrigger={setTrigger}

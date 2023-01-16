@@ -9,6 +9,7 @@ export default function ButtonForm({
   left,
   id,
   path,
+  user,
 }) {
   const [show, setShow] = useState(false);
 
@@ -33,6 +34,7 @@ export default function ButtonForm({
           left={left}
           id={id}
           path={path}
+          user={user}
         />
       )}
     </div>

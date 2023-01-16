@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { HiOutlineUsers } from "react-icons/hi";
 import { AiOutlineGroup } from "react-icons/ai";
 import { MdProductionQuantityLimits } from "react-icons/md";
+import { SiAirtable } from "react-icons/si";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
@@ -18,6 +19,9 @@ export default function Dashboard() {
     fetch(`http://localhost:4000/products`)
       .then((res) => res.json())
       .then((json) => setData((prev) => (prev = { ...prev, products: json })));
+    fetch(`http://localhost:4000/tables`)
+      .then((res) => res.json())
+      .then((json) => setData((prev) => (prev = { ...prev, tables: json })));
   }, []);
   return (
     <div className="flex flex-col w-full">
@@ -85,6 +89,11 @@ export default function Dashboard() {
             <p className="p-3 text-xl font-extrabold">
               Total : {data.products && data.products.length}
             </p>
+            <p className="px-3 text-xl font-extrabold">
+              Total available:{" "}
+              {data.products &&
+                data.products.filter((el) => el.available).length}
+            </p>
             <div className="p-3 text-xl font-extrabold">
               Productlist Top3 :{" "}
               <ul className="px-5">
@@ -101,7 +110,33 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <div className="table"></div>
+        <div className=" w-full flex shadow-2xl px-5">
+          <div>
+            <p className="p-3 text-xl font-extrabold">Tableinfo</p>
+            <Link to="/auth/table">
+              <SiAirtable className="text-9xl text-orange-400 aspect" />
+            </Link>
+          </div>
+          <div>
+            <p className="p-3 text-xl font-extrabold">
+              Total : {data.tables && data.tables.length}
+            </p>
+            <div className="p-3 text-xl font-extrabold">
+              <div>
+                Available Tables :{" "}
+                {data.tables
+                  ? data.tables.filter((el) => el.available).length
+                  : 0}
+              </div>
+              <div>
+                Reserved Tables :{" "}
+                {data.tables
+                  ? data.tables.filter((el) => !el.available).length
+                  : 0}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

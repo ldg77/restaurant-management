@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import SearchForm from "../SearchForm.jsx";
 import ButtonForm from "./ButtonForm.jsx";
+import { useOutletContext } from "react-router-dom";
 export default function Table() {
+  const user = useOutletContext();
   const [tables, setTables] = useState([]);
   const [trigger, setTrigger] = useState(false);
   const fields = {
@@ -37,17 +39,19 @@ export default function Table() {
     <div className="w-full sm:p-5 flex flex-col gap-5">
       <div className="top flex justify-between">
         <p className="font-sans text-2xl">Manage tables</p>
-        <NavLink to="/auth/dashboard">Dashboard</NavLink>
+        {user.isAdmin && <NavLink to="/auth/dashboard">Dashboard</NavLink>}
       </div>
       <div className="add flex justify-between items-center">
-        <ButtonForm
-          setTrigger={setTrigger}
-          fields={fields.add}
-          submit="Add Table"
-          bg="bg-blue-800"
-          method="POST"
-          path="tables"
-        />
+        {user.isAdmin && (
+          <ButtonForm
+            setTrigger={setTrigger}
+            fields={fields.add}
+            submit="Add Table"
+            bg="bg-blue-800"
+            method="POST"
+            path="tables"
+          />
+        )}
         <SearchForm what={"tables"} setData={setTables} on={"name"} />
       </div>
       <table className="text-center">
@@ -87,6 +91,7 @@ export default function Table() {
                         left={"right-0"}
                         id={el._id}
                         path="tables"
+                        user={true}
                       />
                       <button
                         className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition rounded-r-lg"
