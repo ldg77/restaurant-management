@@ -28,7 +28,7 @@ export default function MainPart() {
         </div>
 
         {!status.user.isAdmin && (
-          <p className="font-thin">
+          <p className="font-thin text-center">
             {" "}
             To use all functionality , you must be Admin
           </p>

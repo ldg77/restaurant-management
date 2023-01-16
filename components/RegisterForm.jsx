@@ -12,12 +12,13 @@ export default function RegisterForm({
   path,
   role,
 }) {
-  const changeForm = (arr) =>
-    arr.reduce((acc, el) => {
-      acc[el] = "";
-      return acc;
-    }, {});
-  const INITIAL = changeForm(Object.keys(fields));
+  // const changeForm = (arr) =>
+  //   arr.reduce((acc, el) => {
+  //     acc[el] = "";
+  //     return acc;
+  //   }, {});
+  // const INITIAL = changeForm(Object.keys(fields));
+  const INITIAL = {};
   const navigator = useNavigate();
   const [data, setData] = useState(INITIAL);
   const [roleList, setRoleList] = useState([]);
@@ -70,11 +71,10 @@ export default function RegisterForm({
     })
       .then((response) => response.json())
       .then((json) => {
-        if (json.modifiedCount) {
-          setData(INITIAL);
-          setShow(false);
-          setTrigger((prev) => (prev = !prev));
-        }
+        console.log(json);
+        setData(INITIAL);
+        setShow(false);
+        setTrigger((prev) => (prev = !prev));
       });
   };
 

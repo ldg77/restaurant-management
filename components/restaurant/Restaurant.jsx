@@ -51,15 +51,7 @@ export default function Restaurant() {
   };
 
   return (
-    <div className="p-5 text-center relative">
-      <button
-        onClick={() => setEdit(true)}
-        className={`bg-yellow-400 text-white ${
-          !edit && "px-5 py-3"
-        } rounded-xl absolute right-8`}
-      >
-        {!edit && "Edit"}
-      </button>
+    <div className="p-5 text-center">
       <h1 className="text-2xl">Information about your Restaurant</h1>
       <form
         className="flex flex-col gap-5 justify-center items-center p-5 "
@@ -78,9 +70,9 @@ export default function Restaurant() {
           />
         </label>
         <div className="flex flex-col sm:flex-row gap-10">
-          <div className="flex flex-col shadow-xl rounded-xl p-5">
+          <div className="grid shadow-xl rounded-xl p-5">
             <h1 className="font-thin">Address</h1>
-            <label className="flex justify-between items-center">
+            <label className="grid grid-cols-2 justify-between items-center">
               Street:
               <input
                 type="text"
@@ -92,7 +84,7 @@ export default function Restaurant() {
                 value={restaurantData.address?.street}
               />
             </label>
-            <label className="flex justify-between items-center">
+            <label className="grid grid-cols-2 justify-between items-center">
               Streetnumber:
               <input
                 type="text"
@@ -104,7 +96,7 @@ export default function Restaurant() {
                 value={restaurantData.address?.streetnumber}
               />
             </label>
-            <label className="flex justify-between items-center">
+            <label className="grid grid-cols-2 justify-between items-center">
               Zip Code:
               <input
                 type="text"
@@ -116,7 +108,7 @@ export default function Restaurant() {
                 value={restaurantData.address?.zip}
               />
             </label>
-            <label className="flex justify-between items-center">
+            <label className="grid grid-cols-2 justify-between items-center">
               City:
               <input
                 type="text"
@@ -128,7 +120,7 @@ export default function Restaurant() {
                 value={restaurantData.address?.city}
               />
             </label>
-            <label className="flex justify-between items-center">
+            <label className="grid grid-cols-2 justify-between items-center">
               Country:
               <input
                 type="text"
@@ -143,7 +135,7 @@ export default function Restaurant() {
           </div>
           <div className="flex flex-col shadow-xl rounded-xl p-5">
             <h1 className="font-thin">Contact</h1>
-            <label className="flex justify-between items-center">
+            <label className="grid grid-cols-2 justify-between items-center">
               Phone:
               <input
                 type="tel"
@@ -155,7 +147,7 @@ export default function Restaurant() {
                 value={restaurantData.contact?.phone}
               />
             </label>
-            <label className="flex justify-between items-center">
+            <label className="grid grid-cols-2 justify-between items-center">
               Telephone:
               <input
                 type="tel"
@@ -167,7 +159,7 @@ export default function Restaurant() {
                 value={restaurantData.contact?.fax}
               />
             </label>
-            <label className="flex justify-between items-center">
+            <label className="grid grid-cols-2 justify-between items-center">
               Email:
               <input
                 type="email"
@@ -179,7 +171,7 @@ export default function Restaurant() {
                 value={restaurantData.contact?.email}
               />
             </label>
-            <label className="flex justify-between items-center">
+            <label className="grid grid-cols-2 justify-between items-center">
               Homepage:
               <input
                 type="text"
@@ -199,6 +191,14 @@ export default function Restaurant() {
           {edit && "Save"}
         </button>
       </form>
+      <button
+        onClick={() => setEdit(true)}
+        className={`bg-yellow-400 text-white ${
+          !edit && "px-5 py-3"
+        } rounded-xl `}
+      >
+        {!edit && "Edit"}
+      </button>
     </div>
   );
 }

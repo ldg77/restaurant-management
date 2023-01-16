@@ -9,14 +9,15 @@ export default function ButtonForm({
   hoverBg,
   rounded,
 }) {
-  const INITIAL = {
-    name: "",
-    avatar: {},
-    price: "",
-    description: "",
-    category: "main",
-    available: false,
-  };
+  // const INITIAL = {
+  //   name: "",
+  //   avatar: {},
+  //   price: "",
+  //   description: "",
+  //   category: "main",
+  //   available: false,
+  // };
+  const INITIAL = {};
   const [show, setShow] = useState(false);
   const [data, setData] = useState(INITIAL);
   const categoryList = ["main", "drinks", "salads", "desserts", "starters"];

@@ -8,6 +8,7 @@ import Dashboard from "../components/dashboard/Dashboard.jsx";
 import Group from "../components/group/Group.jsx";
 import Product from "../components/product/Product.jsx";
 import Restaurant from "../components/restaurant/Restaurant.jsx";
+import Table from "../components/table/Table.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="group" element={<Group />} />
           <Route path="product" element={<Product />} />
           <Route path="restaurant" element={<Restaurant />} />
+          <Route path="table" element={<Table />} />
         </Route>
       </Routes>
     </div>
