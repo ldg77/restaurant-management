@@ -20,11 +20,11 @@ export default function Login() {
     e.preventDefault();
     fetch("/users/login", {
       method: "POST",
-      body: JSON.stringify(data),
-      credentials: "include",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
+      body: JSON.stringify(data),
+      credentials: "include",
     })
       .then((response) => response.json())
       .then((json) => {
