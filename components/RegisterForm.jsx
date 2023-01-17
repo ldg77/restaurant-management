@@ -75,13 +75,12 @@ export default function RegisterForm({
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         setData(INITIAL);
         setShow(false);
         setTrigger((prev) => (prev = !prev));
       });
   };
-
+  const now = new Date().toISOString().slice(0, -8);
   const handleSubmit = (e) => {
     e.preventDefault();
     switch (method) {
@@ -108,6 +107,7 @@ export default function RegisterForm({
             className="border-b-2 outline-none active::bg-inherit text-black"
             onChange={handleChange}
             value={data[el]}
+            min={now}
           />
         </div>
       ))}

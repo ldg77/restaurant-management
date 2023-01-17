@@ -55,25 +55,28 @@ export default function Product() {
         />
         <SearchForm what={"products"} setData={setProducts} on={"name"} />
       </div>
-      <table className="text-center">
+      <table className="text-center flex flex-col">
         {products && (
           <>
-            <thead className="w-screen">
-              <tr className="bg-slate-700 text-white uppercase justify-between w-full ">
-                <th>avatar</th>
-                <th>name</th>
-                <th>price</th>
-                <th>description</th>
-                <th>category</th>
-                <th>available</th>
+            <thead className="flex w-full">
+              <tr className="bg-slate-700 text-white uppercase w-full flex justify-between rounded">
+                <th className="w-1/5">avatar</th>
+                <th className="w-1/5">name</th>
+                <th className="w-1/5">price</th>
+                <th className="w-1/5">description</th>
+                <th className="w-1/5">category</th>
+                <th className="w-1/5">available</th>
                 <th className="text-right px-3">action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="flex flex-col w-full">
               {products.map((el) => (
-                <tr className="odd:bg-slate-500 odd:text-white" key={el._id}>
+                <tr
+                  className="bg-slate-500 text-white px-3 flex justify-between items-center my-2 rounded-t"
+                  key={el._id}
+                >
                   {
-                    <td>
+                    <td className="w-1/5">
                       <img
                         src={el.avatar}
                         alt="avatar"
@@ -81,17 +84,17 @@ export default function Product() {
                       />
                     </td>
                   }
-                  {<td>{el.name}</td>}
-                  {<td>{el.price}</td>}
-                  {<td>{el.description}</td>}
-                  {<td>{el.category}</td>}
+                  {<td className="w-1/5">{el.name}</td>}
+                  {<td className="w-1/5">{el.price}€</td>}
+                  {<td className="w-1/5">{el.description}</td>}
+                  {<td className="w-1/5">{el.category}</td>}
                   {
-                    <td>
+                    <td className="w-1/5">
                       <input type="checkbox" checked={el.available} />{" "}
                     </td>
                   }
                   {
-                    <td className="flex justify-end py-5 mr-3">
+                    <td className="flex">
                       <ButtonForm
                         setTrigger={setTrigger}
                         id={el._id}

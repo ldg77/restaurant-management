@@ -11,8 +11,6 @@ export default function Table() {
     add: {
       name: "text",
       capacity: "number",
-      bookedFrom: "datetime-local",
-      bookedTill: "datetime-local",
     },
     edit: {
       bookedFrom: "datetime-local",
@@ -64,6 +62,7 @@ export default function Table() {
                 <th>available</th>
                 <th>bookedFrom</th>
                 <th>bookedTill</th>
+                <th>bookedFor</th>
                 <th className="text-right">action</th>
               </tr>
             </thead>
@@ -77,8 +76,17 @@ export default function Table() {
                       <input type="checkbox" checked={el.available} readOnly />
                     </td>
                   }
-                  {<td>{el.bookedFrom}</td>}
-                  {<td>{el.bookedTill}</td>}
+                  {
+                    <td>
+                      {el.bookedFrom?.slice(0, -8).split("T").join(" : ")}
+                    </td>
+                  }
+                  {
+                    <td>
+                      {el.bookedTill?.slice(0, -8).split("T").join(" : ")}
+                    </td>
+                  }
+                  {<td>{el.user?.name}</td>}
 
                   {
                     <td className="flex justify-end py-5 mr-3">

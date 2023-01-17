@@ -113,8 +113,13 @@ export default function User() {
                   {el.bookedTable.map((table) => (
                     <tr className="bg-slate-500 text-white uppercase flex justify-between items-center px-5 text-end w-2/3 ">
                       <td className="w-1/5">{table.name}</td>
-                      <td className="w-2/5"> {table.bookedFrom}</td>
-                      <td className="w-2/5">{table.bookedTill}</td>
+                      <td className="w-2/5">
+                        {" "}
+                        {table.bookedFrom.slice(0, -8).split("T").join(" : ")}
+                      </td>
+                      <td className="w-2/5">
+                        {table.bookedTill.slice(0, -8).split("T").join(" : ")}
+                      </td>
                     </tr>
                   ))}
                 </>
