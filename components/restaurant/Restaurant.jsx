@@ -10,7 +10,7 @@ export default function Restaurant() {
   });
 
   useEffect(() => {
-    fetch("http://localhost:4000/restaurants")
+    fetch("/restaurants")
       .then((res) => res.json())
       .then((json) => {
         json.length ? setRestaurantData(json[0]) : setEdit(true);
@@ -40,7 +40,7 @@ export default function Restaurant() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:4000/restaurants", {
+    fetch("/restaurants", {
       method: "POST",
       body: JSON.stringify(restaurantData),
       headers: {

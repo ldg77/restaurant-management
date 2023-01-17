@@ -8,7 +8,7 @@ export default function MainPart() {
   const navigator = useNavigate();
   const [status, setStatus] = useState({});
   useEffect(() => {
-    fetch("http://localhost:4000/users/checklogin", {
+    fetch("/users/checklogin", {
       credentials: "include",
     })
       .then((res) => res.json())

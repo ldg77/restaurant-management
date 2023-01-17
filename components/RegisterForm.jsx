@@ -22,7 +22,7 @@ export default function RegisterForm({
   const [showError, setSchowError] = useState({ show: false, message: "" });
   useEffect(() => {
     if (role) {
-      fetch("http://localhost:4000/groups")
+      fetch("/groups")
         .then((response) => response.json())
         .then((json) => {
           setRoleList((prev) => (prev = json));
@@ -30,7 +30,7 @@ export default function RegisterForm({
         });
     }
     if (user) {
-      fetch("http://localhost:4000/users")
+      fetch("/users")
         .then((response) => response.json())
         .then((json) => {
           setUserList((prev) => (prev = json));
@@ -49,7 +49,7 @@ export default function RegisterForm({
   const handlePOST = () => {
     if (submit === "register" && !data.password === data.repeatPassword) return;
 
-    fetch(`http://localhost:4000/${path}`, {
+    fetch(`/${path}`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -71,7 +71,7 @@ export default function RegisterForm({
       });
   };
   const handlePATCH = (id) => {
-    fetch(`http://localhost:4000/${path}/${id}`, {
+    fetch(`/${path}/${id}`, {
       method: "PATCH",
       body: JSON.stringify(data),
       headers: {

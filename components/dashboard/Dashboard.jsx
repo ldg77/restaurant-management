@@ -10,16 +10,16 @@ export default function Dashboard() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:4000/users`)
+    fetch(`/users`)
       .then((res) => res.json())
       .then((json) => setData((prev) => (prev = { ...prev, users: json })));
-    fetch(`http://localhost:4000/groups`)
+    fetch(`/groups`)
       .then((res) => res.json())
       .then((json) => setData((prev) => (prev = { ...prev, groups: json })));
-    fetch(`http://localhost:4000/products`)
+    fetch(`/products`)
       .then((res) => res.json())
       .then((json) => setData((prev) => (prev = { ...prev, products: json })));
-    fetch(`http://localhost:4000/tables`)
+    fetch(`/tables`)
       .then((res) => res.json())
       .then((json) => setData((prev) => (prev = { ...prev, tables: json })));
   }, []);

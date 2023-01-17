@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 export default function Menu({ status }) {
   const handleĹogout = () => {
-    fetch("http://localhost:4000/users/logout", {
+    fetch("/users/logout", {
       method: "POST",
       credentials: "include",
       headers: {

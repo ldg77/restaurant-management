@@ -9,14 +9,6 @@ export default function ButtonForm({
   hoverBg,
   rounded,
 }) {
-  // const INITIAL = {
-  //   name: "",
-  //   avatar: {},
-  //   price: "",
-  //   description: "",
-  //   category: "main",
-  //   available: false,
-  // };
   const INITIAL = {};
   const [show, setShow] = useState(false);
   const [data, setData] = useState(INITIAL);
@@ -28,7 +20,7 @@ export default function ButtonForm({
     e.preventDefault();
     const formData = new FormData();
     Object.keys(data).forEach((el) => formData.append(el, data[el]));
-    fetch(`http://localhost:4000/products/${id ? id : ""}`, {
+    fetch(`/products/${id ? id : ""}`, {
       method: !id ? "POST" : "PATCH",
       body: formData,
     })

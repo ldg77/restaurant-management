@@ -24,13 +24,13 @@ export default function Product() {
     },
   };
   useEffect(() => {
-    fetch("http://localhost:4000/products")
+    fetch("/products")
       .then((res) => res.json())
       .then((json) => setProducts((prev) => (prev = json)));
   }, [trigger]);
 
   const handleDelete = (id) => {
-    fetch("http://localhost:4000/products/" + id, {
+    fetch("/products/" + id, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=UTF-8",

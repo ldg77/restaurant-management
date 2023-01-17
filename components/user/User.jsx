@@ -22,13 +22,13 @@ export default function User() {
     },
   };
   useEffect(() => {
-    fetch("http://localhost:4000/users")
+    fetch("/users")
       .then((res) => res.json())
       .then((json) => setUsers((prev) => (prev = json)));
   }, [trigger]);
 
   const handleDelete = (id) => {
-    fetch("http://localhost:4000/users/" + id, {
+    fetch("/users/" + id, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=UTF-8",

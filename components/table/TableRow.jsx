@@ -8,7 +8,7 @@ export default function TableRow({
   user,
 }) {
   const handleClear = () => {
-    fetch("http://localhost:4000/tables/clear/" + el._id, {
+    fetch("/tables/clear/" + el._id, {
       method: "PATCH",
       body: {},
     }).then((res) => {

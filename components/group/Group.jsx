@@ -15,13 +15,13 @@ export default function Group() {
     },
   };
   useEffect(() => {
-    fetch("http://localhost:4000/groups")
+    fetch("/groups")
       .then((res) => res.json())
       .then((json) => setGroups((prev) => (prev = json)));
   }, [trigger]);
 
   const handleDelete = (id) => {
-    fetch("http://localhost:4000/groups/" + id, {
+    fetch("/groups/" + id, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=UTF-8",

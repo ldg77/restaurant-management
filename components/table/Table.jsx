@@ -19,13 +19,13 @@ export default function Table() {
     },
   };
   useEffect(() => {
-    fetch("http://localhost:4000/tables")
+    fetch("/tables")
       .then((res) => res.json())
       .then((json) => setTables((prev) => (prev = json)));
   }, [trigger]);
 
   const handleDelete = (id) => {
-    fetch("http://localhost:4000/tables/" + id, {
+    fetch("/tables/" + id, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=UTF-8",

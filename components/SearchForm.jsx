@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export default function SearchForm({ what, setData, on }) {
   const [search, setSearch] = useState("");
   useEffect(() => {
-    fetch("http://localhost:4000/" + what)
+    fetch("/" + what)
       .then((res) => res.json())
       .then((json) => setData((prev) => (prev = json)));
   }, [search.length === 0]);
