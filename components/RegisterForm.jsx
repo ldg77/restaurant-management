@@ -58,7 +58,8 @@ export default function RegisterForm({
     })
       .then((response) => response.json())
       .then((json) => {
-        if (json.message) {
+        if (json.approved) {
+          console.log(json);
           if (submit === "register") {
             navigator("/");
           } else if (submit === "login") {
@@ -67,6 +68,13 @@ export default function RegisterForm({
           setData(INITIAL);
           setShow(false);
           setTrigger((prev) => (prev = !prev));
+        } else {
+          setSchowError(
+            (prev) => (prev = { show: true, message: json.message })
+          );
+          setTimeout(() => {
+            setSchowError((prev) => (prev = { show: false, message: "" }));
+          }, 1000);
         }
       });
   };

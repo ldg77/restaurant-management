@@ -80,7 +80,7 @@ export default function ButtonForm({
             />
           </label>
           <label className="flex justify-between gap-5">
-            checkbox
+            available
             <input
               type="checkbox"
               name="available"

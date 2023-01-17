@@ -81,7 +81,7 @@ export default function Dashboard() {
         <div className="product w-full flex shadow-2xl px-5">
           <div>
             <p className="p-3 text-xl font-extrabold">Productinfo</p>
-            <Link to="/auth/group">
+            <Link to="/auth/product">
               <MdProductionQuantityLimits className="text-9xl text-amber-900 aspect" />
             </Link>
           </div>

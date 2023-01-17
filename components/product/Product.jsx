@@ -6,23 +6,7 @@ import ButtonForm from "./ButtonForm.jsx";
 export default function Product() {
   const [products, setProducts] = useState([]);
   const [trigger, setTrigger] = useState(false);
-  const fields = {
-    add: {
-      name: "text",
-      avatar: "file",
-      price: "number",
-      description: "textarea",
-      category: "text",
-    },
-    edit: {
-      name: "text",
-      avatar: "file",
-      price: "number",
-      description: "textarea",
-      category: "text",
-      available: "checkbox",
-    },
-  };
+
   useEffect(() => {
     fetch("/products")
       .then((res) => res.json())

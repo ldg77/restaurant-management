@@ -29,7 +29,7 @@ export default function Login() {
       .then((response) => response.json())
       .then((json) => {
         setData(INITIAL);
-        if (json.message) {
+        if (json.approved) {
           navigator("/auth");
         } else {
           setShow(true);
