@@ -1,6 +1,22 @@
 import ButtonForm from "./ButtonForm.jsx";
 
-export default function TableRow({ el, fields, setTrigger }) {
+export default function TableRow({
+  el,
+  fields,
+  setTrigger,
+  handleDelete,
+  user,
+}) {
+  const handleClear = () => {
+    fetch("http://localhost:4000/tables/clear/" + el._id, {
+      method: "PATCH",
+      body: {},
+    }).then((res) => {
+      if (res.ok) {
+        setTrigger((prev) => (prev = !prev));
+      }
+    });
+  };
   return (
     <tr className="odd:bg-slate-500 odd:text-white" key={el._id}>
       {<td>{el.name}</td>}
@@ -15,7 +31,7 @@ export default function TableRow({ el, fields, setTrigger }) {
       {<td>{el.user?.name}</td>}
 
       {
-        <td className="flex justify-end py-5 mr-3">
+        <td className="flex justify-end items-center py-5 mr-3">
           <ButtonForm
             fields={fields.edit}
             setTrigger={setTrigger}
@@ -25,16 +41,26 @@ export default function TableRow({ el, fields, setTrigger }) {
             left={"right-0"}
             id={el._id}
             path="tables"
-            user={true}
+            user={user.isAdmin ? true : user._id}
           />
           <button
-            className="bg-red-500 sm:p-3 text-white hover:bg-red-600 transition rounded-r-lg"
-            onClick={() => {
-              handleDelete(el._id);
-            }}
+            className={`bg-green-500 sm:p-3 text-white hover:bg-green-600 transition ${
+              !user.isAdmin && "rounded-r-lg"
+            }`}
+            onClick={handleClear}
           >
-            Delete
+            Clear
           </button>
+          {user.isAdmin && (
+            <button
+              className={`bg-red-500 sm:p-3 text-white hover:bg-red-600 transition rounded-r-lg`}
+              onClick={() => {
+                handleDelete(el._id);
+              }}
+            >
+              Delete
+            </button>
+          )}
         </td>
       }
     </tr>

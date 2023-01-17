@@ -70,11 +70,23 @@ export default function Table() {
             <tbody>
               {tables.map((el) =>
                 !user.isAdmin ? (
-                  !el.user && (
-                    <TableRow el={el} fields={fields} setTrigger={setTrigger} />
+                  (el.user?.name === user.name || !el.user) && (
+                    <TableRow
+                      el={el}
+                      fields={fields}
+                      setTrigger={setTrigger}
+                      handleDelete={handleDelete}
+                      user={user}
+                    />
                   )
                 ) : (
-                  <TableRow el={el} fields={fields} setTrigger={setTrigger} />
+                  <TableRow
+                    el={el}
+                    fields={fields}
+                    setTrigger={setTrigger}
+                    handleDelete={handleDelete}
+                    user={user}
+                  />
                 )
               )}
             </tbody>

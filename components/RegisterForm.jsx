@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import ErrorPage from "./ErrorPage.jsx";
 export default function RegisterForm({
   position,
   setShow,
@@ -18,6 +19,7 @@ export default function RegisterForm({
   const [data, setData] = useState(INITIAL);
   const [roleList, setRoleList] = useState([]);
   const [userList, setUserList] = useState([]);
+  const [showError, setSchowError] = useState({ show: false, message: "" });
   useEffect(() => {
     if (role) {
       fetch("http://localhost:4000/groups")
@@ -32,7 +34,10 @@ export default function RegisterForm({
         .then((response) => response.json())
         .then((json) => {
           setUserList((prev) => (prev = json));
-          setData((prev) => (prev = { ...prev, user: json[0]._id }));
+          setData(
+            (prev) =>
+              (prev = { ...prev, user: user === true ? json[0]._id : user })
+          );
         });
     }
   }, []);
@@ -75,9 +80,18 @@ export default function RegisterForm({
     })
       .then((response) => response.json())
       .then((json) => {
-        setData(INITIAL);
-        setShow(false);
-        setTrigger((prev) => (prev = !prev));
+        if (json.approved) {
+          setData(INITIAL);
+          setShow(false);
+          setTrigger((prev) => (prev = !prev));
+        } else {
+          setSchowError(
+            (prev) => (prev = { show: true, message: json.message })
+          );
+          setTimeout(() => {
+            setSchowError((prev) => (prev = { show: false, message: "" }));
+          }, 1000);
+        }
       });
   };
   const now = new Date().toISOString().slice(0, -8);
@@ -126,7 +140,7 @@ export default function RegisterForm({
           ))}
         </select>
       )}
-      {user && (
+      {user === true && (
         <select
           name="user"
           placeholder="user"
@@ -143,6 +157,7 @@ export default function RegisterForm({
       <button className="bg-slate-700 text-white w-max px-3 py-2 rounded-xl mx-auto hover:bg-slate-900">
         {submit}
       </button>
+      {showError.show && <ErrorPage message={showError.message} />}
     </form>
   );
 }

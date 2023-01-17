@@ -41,7 +41,7 @@ export default function User() {
     <div className="w-full sm:p-5 flex flex-col gap-5">
       <div className="top flex justify-between">
         <p className="font-sans text-2xl">Manage users</p>
-        <NavLink to="dashboard">Dashboard</NavLink>
+        <NavLink to="/auth/dashboard">Dashboard</NavLink>
       </div>
       <div className="add flex justify-between items-center ">
         <ButtonForm
@@ -115,10 +115,10 @@ export default function User() {
                       <td className="w-1/5">{table.name}</td>
                       <td className="w-2/5">
                         {" "}
-                        {table.bookedFrom.slice(0, -8).split("T").join(" : ")}
+                        {table.bookedFrom?.slice(0, -8).split("T").join(" : ")}
                       </td>
                       <td className="w-2/5">
-                        {table.bookedTill.slice(0, -8).split("T").join(" : ")}
+                        {table.bookedTill?.slice(0, -8).split("T").join(" : ")}
                       </td>
                     </tr>
                   ))}

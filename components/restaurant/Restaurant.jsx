@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Restaurant() {
   const [edit, setEdit] = useState(false);
@@ -52,6 +53,10 @@ export default function Restaurant() {
 
   return (
     <div className="p-5 text-center">
+      <div className="top flex justify-between">
+        <p className="font-sans text-2xl">Manage Restaurantinfo</p>
+        <NavLink to="/auth/dashboard">Dashboard</NavLink>
+      </div>
       <h1 className="text-2xl">Information about your Restaurant</h1>
       <form
         className="flex flex-col gap-5 justify-center items-center p-5 "
