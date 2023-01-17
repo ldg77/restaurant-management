@@ -53,6 +53,7 @@ export default function Login() {
             className="border-b-2 outline-none active::bg-inherit"
             onChange={handleChange}
             value={data.username}
+            required
           />
         </div>
         <div className="flex justify-between items-center gap-3">
@@ -63,6 +64,7 @@ export default function Login() {
             className="border-b-2 outline-none bg-inherit"
             onChange={handleChange}
             value={data.password}
+            required
           />
         </div>
         <button className="bg-slate-700 text-white w-max px-3 py-2 rounded-xl mx-auto hover:bg-slate-900">

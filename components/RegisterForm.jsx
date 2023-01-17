@@ -108,6 +108,7 @@ export default function RegisterForm({
             onChange={handleChange}
             value={data[el]}
             min={now}
+            required
           />
         </div>
       ))}

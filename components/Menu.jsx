@@ -8,9 +8,7 @@ export default function Menu({ status }) {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    })
-      .then((res) => res.json())
-      .then((json) => console.log(json));
+    });
   };
   return (
     <div className="sm:min-h-max sm:h-full">
