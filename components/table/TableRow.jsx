@@ -35,7 +35,7 @@ export default function TableRow({
           <ButtonForm
             fields={fields.edit}
             setTrigger={setTrigger}
-            submit="Edit"
+            submit="Book"
             method="PATCH"
             bg="bg-yellow-400"
             left={"right-0"}

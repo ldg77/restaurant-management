@@ -1,3 +1,4 @@
 export default function ErrorPage({ message }) {
-  return <div className="text-red-900">{message}</div>;
+  console.log(message);
+  return <div className="text-red-900 text-center">{message}</div>;
 }
