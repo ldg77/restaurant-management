@@ -1,4 +1,3 @@
-import Menu from "./components/Menu.jsx";
 import { Routes, Route } from "react-router-dom";
 import MainPart from "./components/MainPart.jsx";
 import User from "./components/user/User.jsx";
