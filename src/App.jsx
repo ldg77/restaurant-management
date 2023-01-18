@@ -1,14 +1,14 @@
-import Menu from "../components/Menu.jsx";
+import Menu from "./components/Menu.jsx";
 import { Routes, Route } from "react-router-dom";
-import MainPart from "../components/MainPart.jsx";
-import User from "../components/user/User.jsx";
-import Login from "../components/Login.jsx";
-import Register from "../components/Register.jsx";
-import Dashboard from "../components/dashboard/Dashboard.jsx";
-import Group from "../components/group/Group.jsx";
-import Product from "../components/product/Product.jsx";
-import Restaurant from "../components/restaurant/Restaurant.jsx";
-import Table from "../components/table/Table.jsx";
+import MainPart from "./components/MainPart.jsx";
+import User from "./components/user/User.jsx";
+import Login from "./components/Login.jsx";
+import Register from "./components/Register.jsx";
+import Dashboard from "./components/dashboard/Dashboard.jsx";
+import Group from "./components/group/Group.jsx";
+import Product from "./components/product/Product.jsx";
+import Restaurant from "./components/restaurant/Restaurant.jsx";
+import Table from "./components/table/Table.jsx";
 
 function App() {
   return (
